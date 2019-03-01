@@ -7,6 +7,14 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/static',express.static(path.join(__dirname,"public")));
 
 
+const brand = require('./router/brandRouter')
+const upimg = require('./router/uplodRouter')
+app.use('/brand',brand)
+app.use('/upload',upimg)
+
+
+
+
 app.listen(3001,()=>{
     console.log('server start in port :'+3001)
 })
