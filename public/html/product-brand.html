@@ -113,6 +113,8 @@ $('.table-sort').dataTable({
 // brandfind()
 //分页
 
+let token = localStorage.getItem('token')
+
 //批量删除试水
 function datadel(){
 	// console.log($("td :checked").parent().next())
@@ -185,10 +187,15 @@ let id = '';
 function active_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
 // let roopath = 'http://127.0.0.1:3000'
-		// alert(id)
-		$.post('/brand/updataById',{_id:id},(res)=>{
-			$(obj).parents("tr").remove();
-			layer.msg('已删除!',{icon:1,time:1000});
+		// alert(token)
+		$.post('/brand/updataById',{_id:id,token:token},(res)=>{
+			console.log(res,1)
+			if(res.err=== 1){
+				$(obj).parents("tr").remove();
+				layer.msg('已删除!',{icon:1,time:1000});
+			}else{
+				alert(res.msg);
+			}
 		})
 		
 	});

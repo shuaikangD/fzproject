@@ -13,7 +13,7 @@ router.post('/findbrand',(req,res)=>{
     })
 })
 //添加品牌
-router.post('/addbrand',(req,res)=>{
+router.post('/addbrand',util.verify,(req,res)=>{
     // console.log(req.body)
     let {serial,name,type,desc,logo} = req.body
     brand.insertMany({serial:Number(serial),name,type,desc,logo})
@@ -22,12 +22,15 @@ router.post('/addbrand',(req,res)=>{
         util.sendRes(res,0,'添加成功',data)
     })
 })
-//删除品牌
-router.post('/updataById',(req,res)=>{
+//删除品牌////////////////////////////////////////////////
+router.post('/updataById',util.verify,(req,res)=>{
     let {_id} = req.body;
     brand.deleteMany({_id})
     .then((data)=>{
         util.sendRes(res,0,'删除成功',data)
+    })
+    .catch((err)=>{
+        util.sendRes(res,1,'删除失败',data)
     })
 })
 //根据ID查数据品牌
@@ -38,6 +41,7 @@ router.post('/getDataById',(req,res)=>{
         console.log(data)
         util.sendRes(res,0,'查询成功',data)
     })
+    
 })
 //修改品牌
 router.post('/upbrand',(req,res)=>{
