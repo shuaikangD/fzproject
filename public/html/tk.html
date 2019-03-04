@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p><input type="text" id="username" value=""></p>
+    <p><input type="text" id="password" value=""></p>
+    <p>
+        <button onclick="login()">登录</button>
+    </p>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script>
+        var url = 'http://localhost:3001'
+
+        function login(){
+            let np = {
+                username:$('#username').val(),
+                password:$('#password').val()
+            }
+            $.post(url+'/admin/admin/login',np,function(res){
+                console.log(res,res.data.data[0].isadmin);
+                localStorage.setItem('token',res.data.tk);
+                // var tk = localStorage.getItem('token');
+                // console.log(tk);
+                alert(res.msg);
+                
+            })
+        }
+    
+    </script>
+</body>
+</html>
