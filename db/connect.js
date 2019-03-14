@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/user',{useNewUrlParser:true});
+mongoose.connect('mongodb://10.9.62.175:27017/clothing',{useNewUrlParser:true});
 var db = mongoose.connection;
 db.on('error',(err)=>{
     console.log("连接失败");
